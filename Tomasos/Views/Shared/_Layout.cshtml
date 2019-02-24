@@ -1,0 +1,41 @@
+﻿<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="~/CSS/StyleSheet.css" />
+    <title>Tomasos Pizzeria</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">Tomasos</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <form asp-controller="Home" asp-action="Search" method="post">
+                        <input class="form-control-sm searchHeight" type="text" name="searchString" placeholder="Account" />
+                        <input class="form-control-sm searchHeight" type="text" name="searchString" placeholder="Password" />
+                        <button class="btn btn-primary searchHeight">Login</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="main">
+        @RenderBody()
+    </div>
+</body>
