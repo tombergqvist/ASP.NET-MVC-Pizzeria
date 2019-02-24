@@ -51,14 +51,48 @@ namespace Tomasos.Controllers
                     ModelState.AddModelError("", error.Description);
                 }
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
+        [HttpGet]
         public ActionResult Registered()
         {
             return View();
+        }
+
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            LoginViewModel model = new LoginViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.IsPersistent, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid login.");
+                }
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

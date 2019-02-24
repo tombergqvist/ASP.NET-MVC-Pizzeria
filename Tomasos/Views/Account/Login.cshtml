@@ -1,0 +1,9 @@
+﻿@model Tomasos.ViewModels.LoginViewModel
+
+<form asp-controller="Account" asp-action="Login" method="post">
+    <input class="form-control-sm searchHeight" type="text" asp-for="@Model.Email" placeholder="Email" />
+    <input class="form-control-sm searchHeight" type="text" asp-for="@Model.Password" placeholder="Password" />
+    <label asp-for="@Model.IsPersistent">Remember me</label>
+    <input type="checkbox" asp-for="@Model.IsPersistent"/>
+    <button class="btn btn-primary searchHeight">Login</button>
+</form>
