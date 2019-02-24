@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Tomasos.IdentityData;
+using Tomasos.IdentityModels;
+using Tomasos.Models;
 
 namespace Tomasos
 {
@@ -28,14 +29,22 @@ namespace Tomasos
         {
             services.AddMvc();
 
-            services.AddDbContext <ApplicationDbContext>(options => options.UseSqlServer
+            services.AddDbContext <TomasosContext>(options => options.UseSqlServer
                 (Configuration.GetConnectionString("Tomasos")));
-            services.AddIdentity<ApplicationUser, IdentityRole>()                .AddEntityFrameworkStores<ApplicationDbContext>()                .AddDefaultTokenProviders();        }
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<TomasosContext>()
+                .AddDefaultTokenProviders();
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseAuthentication();            app.UseStaticFiles();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            app.UseAuthentication();
+            app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
     }
