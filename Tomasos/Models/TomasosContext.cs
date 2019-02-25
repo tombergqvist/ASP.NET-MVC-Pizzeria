@@ -19,7 +19,6 @@ namespace Tomasos.Models
         }
         public virtual DbSet<Bestallning> Bestallning { get; set; }
         public virtual DbSet<BestallningMatratt> BestallningMatratt { get; set; }
-        public virtual DbSet<Kund> Kund { get; set; }
         public virtual DbSet<Matratt> Matratt { get; set; }
         public virtual DbSet<MatrattProdukt> MatrattProdukt { get; set; }
         public virtual DbSet<MatrattTyp> MatrattTyp { get; set; }
@@ -76,49 +75,6 @@ namespace Tomasos.Models
                     .HasForeignKey(d => d.MatrattId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_BestallningMatratt_Matratt");
-            });
-
-            modelBuilder.Entity<Kund>(entity =>
-            {
-                entity.Property(e => e.KundId).HasColumnName("KundID");
-
-                entity.Property(e => e.AnvandarNamn)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Email)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Gatuadress)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Losenord)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Namn)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Postnr)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Postort)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Telefon)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Matratt>(entity =>

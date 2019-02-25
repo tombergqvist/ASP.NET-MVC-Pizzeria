@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using Tomasos.IdentityModels;
 
 namespace Tomasos.Models
 {
@@ -14,9 +16,10 @@ namespace Tomasos.Models
         public DateTime BestallningDatum { get; set; }
         public int Totalbelopp { get; set; }
         public bool Levererad { get; set; }
-        public int KundId { get; set; }
+        public string KundId { get; set; }
 
-        public virtual Kund Kund { get; set; }
+        [ForeignKey("KundId")]
+        public virtual ApplicationUser Kund { get; set; }
         public virtual ICollection<BestallningMatratt> BestallningMatratt { get; set; }
     }
 }

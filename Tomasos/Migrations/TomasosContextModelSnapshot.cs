@@ -196,7 +196,7 @@ namespace Tomasos.Migrations
                     b.Property<DateTime>("BestallningDatum")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("KundId")
+                    b.Property<string>("KundId")
                         .HasColumnName("KundID");
 
                     b.Property<bool>("Levererad");
@@ -227,56 +227,6 @@ namespace Tomasos.Migrations
                     b.HasIndex("BestallningId");
 
                     b.ToTable("BestallningMatratt");
-                });
-
-            modelBuilder.Entity("Tomasos.Models.Kund", b =>
-                {
-                    b.Property<int>("KundId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("KundID")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AnvandarNamn")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Gatuadress")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Losenord")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Namn")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Postnr")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Postort")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Telefon")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.HasKey("KundId");
-
-                    b.ToTable("Kund");
                 });
 
             modelBuilder.Entity("Tomasos.Models.Matratt", b =>
@@ -402,7 +352,7 @@ namespace Tomasos.Migrations
 
             modelBuilder.Entity("Tomasos.Models.Bestallning", b =>
                 {
-                    b.HasOne("Tomasos.Models.Kund", "Kund")
+                    b.HasOne("Tomasos.IdentityModels.ApplicationUser", "Kund")
                         .WithMany("Bestallning")
                         .HasForeignKey("KundId")
                         .HasConstraintName("FK_Bestallning_Kund");

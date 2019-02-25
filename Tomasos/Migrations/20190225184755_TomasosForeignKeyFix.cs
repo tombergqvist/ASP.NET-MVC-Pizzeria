@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Tomasos.Migrations
 {
-    public partial class TomasosMigration : Migration
+    public partial class TomasosForeignKeyFix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,31 +40,14 @@ namespace Tomasos.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Street = table.Column<string>(nullable: true),
+                    Postcode = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Kund",
-                columns: table => new
-                {
-                    KundID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Namn = table.Column<string>(unicode: false, maxLength: 100, nullable: false),
-                    Gatuadress = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
-                    Postnr = table.Column<string>(unicode: false, maxLength: 20, nullable: false),
-                    Postort = table.Column<string>(unicode: false, maxLength: 100, nullable: false),
-                    Email = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-                    Telefon = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-                    AnvandarNamn = table.Column<string>(unicode: false, maxLength: 20, nullable: false),
-                    Losenord = table.Column<string>(unicode: false, maxLength: 20, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Kund", x => x.KundID);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,7 +191,7 @@ namespace Tomasos.Migrations
                     BestallningDatum = table.Column<DateTime>(type: "datetime", nullable: false),
                     Totalbelopp = table.Column<int>(nullable: false),
                     Levererad = table.Column<bool>(nullable: false),
-                    KundID = table.Column<int>(nullable: false)
+                    KundID = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -216,8 +199,8 @@ namespace Tomasos.Migrations
                     table.ForeignKey(
                         name: "FK_Bestallning_Kund",
                         column: x => x.KundID,
-                        principalTable: "Kund",
-                        principalColumn: "KundID",
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -379,9 +362,6 @@ namespace Tomasos.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Bestallning");
 
             migrationBuilder.DropTable(
@@ -391,7 +371,7 @@ namespace Tomasos.Migrations
                 name: "Produkt");
 
             migrationBuilder.DropTable(
-                name: "Kund");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "MatrattTyp");

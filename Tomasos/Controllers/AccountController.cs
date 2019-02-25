@@ -50,13 +50,16 @@ namespace Tomasos.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Username, Email = model.Email, City = model.City,
                     Street = model.Street, Postcode = model.Postcode, PhoneNumber = model.Phone  };
-
+                
                 var result = await _userManager.CreateAsync(user, model.Password);
-
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Registered");
+                    result = await _userManager.AddToRoleAsync(user, "REGULAR");
+                    if (result.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Registered");
+                    }
                 }
                 foreach(var error in result.Errors)
                 {

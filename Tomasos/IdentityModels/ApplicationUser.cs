@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tomasos.Models;
 
 namespace Tomasos.IdentityModels
 {
@@ -11,5 +12,7 @@ namespace Tomasos.IdentityModels
         public string Street { get; set; }
         public string Postcode { get; set; }
         public string City { get; set; }
+
+        public virtual ICollection<Bestallning> Bestallning { get; set; }
     }
 }

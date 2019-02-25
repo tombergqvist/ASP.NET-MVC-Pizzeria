@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190225181835_TomasosForeignKeyFix.cs" />
+    <Compile Remove="Migrations\20190225181835_TomasosForeignKeyFix.Designer.cs" />
+    <Compile Remove="Migrations\20190225184315_TomasosForeignKey.cs" />
+    <Compile Remove="Migrations\20190225184315_TomasosForeignKey.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
