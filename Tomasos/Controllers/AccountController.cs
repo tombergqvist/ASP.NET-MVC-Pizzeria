@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Tomasos.IdentityModels;
+using Tomasos.Models;
 using Tomasos.ViewModels;
 
 namespace Tomasos.Controllers
@@ -23,6 +24,12 @@ namespace Tomasos.Controllers
             _signInManager = signInManager;
         }
 
+        private Task<ApplicationUser> GetCurrentUserAsync()
+        {
+            return _userManager.GetUserAsync(User);
+        }
+
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Register()
@@ -36,9 +43,14 @@ namespace Tomasos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            //TomasosContext context = new TomasosContext();
+            //var currentUser = await GetCurrentUserAsync();
+            //context.Users.Where(u => u.Id == currentUser.);
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, City = model.City,
+                    Street = model.Street, Postcode = model.Postcode, PhoneNumber = model.Phone  };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
@@ -74,7 +86,7 @@ namespace Tomasos.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.IsPersistent, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.IsPersistent, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "Home");

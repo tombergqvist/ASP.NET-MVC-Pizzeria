@@ -8,11 +8,15 @@ namespace Tomasos.ViewModels
 {
     public class RegisterViewModel
     {
-        //TODO: FIX CUSTOM
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [StringLength(20, ErrorMessage = "The {0} must be between {2} and {1} characters long.", MinimumLength = 2)]
+        [Display(Name = "Username")]
+        public string Username { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be between {2} and {1} characters long.", MinimumLength = 6)]
@@ -24,5 +28,26 @@ namespace Tomasos.ViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "The {0} must be between {2} and {1} characters long.", MinimumLength = 2)]
+        [Display(Name = "Street")]
+        public string Street { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "The {0} must be between {2} and {1} characters long.", MinimumLength = 1)]
+        [Display(Name = "Postcode")]
+        public string Postcode { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "The {0} must be between {2} and {1} characters long.", MinimumLength = 1)]
+        [Display(Name = "City")]
+        public string City { get; set; }
+
+        //Optional properties
+        [Phone]
+        [StringLength(50, ErrorMessage = "The {0} must be between {2} and {1} characters long.", MinimumLength = 0)]
+        [Display(Name = "Phone")]
+        public string Phone { get; set; }
     }
 }

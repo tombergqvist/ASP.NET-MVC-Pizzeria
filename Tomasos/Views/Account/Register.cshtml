@@ -1,12 +1,17 @@
 ﻿@model Tomasos.ViewModels.RegisterViewModel
 
 <form asp-controller="Account" asp-action="Register" method="post">
-    <h4>Create a new account.</h4>
+    <h2>Create a new account</h2>
     <hr />
     <div class="form-group">
         <label asp-for="Email"></label>
         <input asp-for="Email" class="form-control" />
         <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Username"></label>
+        <input asp-for="Username" class="form-control" />
+        <span asp-validation-for="Username" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Password"></label>
@@ -18,5 +23,25 @@
         <input asp-for="ConfirmPassword" class="form-control" />
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
-    <button type="submit">Register</button>
+    <div class="form-group">
+        <label asp-for="Street"></label>
+        <input asp-for="Street" class="form-control" />
+        <span asp-validation-for="Street" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Postcode"></label>
+        <input asp-for="Postcode" class="form-control" />
+        <span asp-validation-for="Postcode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="City"></label>
+        <input asp-for="City" class="form-control" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    <button class="btn btn-primary searchHeight">Register</button>
 </form>
