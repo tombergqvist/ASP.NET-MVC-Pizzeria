@@ -34,6 +34,21 @@ namespace Tomasos
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<TomasosContext>()
                 .AddDefaultTokenProviders();
+            services.Configure<IdentityOptions>(options => 
+            {
+                // Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireNonAlphanumeric = false;
+            });
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+
+                options.LoginPath = "/Account/Login";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

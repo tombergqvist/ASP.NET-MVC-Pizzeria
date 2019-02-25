@@ -15,23 +15,19 @@ namespace Tomasos.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private TomasosContext _context;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            TomasosContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
-
-        private Task<ApplicationUser> GetCurrentUserAsync()
-        {
-            return _userManager.GetUserAsync(User);
-        }
-
 
         [HttpGet]
-        [AllowAnonymous]
         public ActionResult Register()
         {
             RegisterViewModel model = new RegisterViewModel();
@@ -39,18 +35,14 @@ namespace Tomasos.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            //TomasosContext context = new TomasosContext();
-            //var currentUser = await GetCurrentUserAsync();
-            //context.Users.Where(u => u.Id == currentUser.);
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Username, Email = model.Email, City = model.City,
-                    Street = model.Street, Postcode = model.Postcode, PhoneNumber = model.Phone  };
-                
+                    Street = model.Street, Postcode = model.Postcode, PhoneNumber = model.Phone };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -61,7 +53,7 @@ namespace Tomasos.Controllers
                         return RedirectToAction("Registered");
                     }
                 }
-                foreach(var error in result.Errors)
+                foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
@@ -108,6 +100,60 @@ namespace Tomasos.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Regular, Premium, Admin")]
+        public async Task<ActionResult> UserInfo()
+        {
+            UserInfoViewModel model = new UserInfoViewModel();
+            var currentUser = await GetCurrentUserAsync();
+
+            model.City = currentUser.City;
+            model.Email = currentUser.Email;
+            model.Phone = currentUser.PhoneNumber;
+            model.Postcode = currentUser.Postcode;
+            model.Street = currentUser.Street;
+
+            return View(model);
+        }
+        [HttpPost]
+        [Authorize(Roles = "Regular, Premium, Admin")]
+        public async Task<ActionResult> UserInfo(UserInfoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentUser = await GetCurrentUserAsync();
+                if (await _userManager.CheckPasswordAsync(currentUser, model.CurrentPassword))
+                {
+                    currentUser.City = model.City;
+                    currentUser.Email = model.Email;
+                    currentUser.PhoneNumber = model.Phone;
+                    currentUser.Postcode = model.Postcode;
+                    currentUser.Street = model.Street;
+
+                    if(model.Password != null)
+                        await _userManager.ChangePasswordAsync(currentUser, model.CurrentPassword, model.Password);
+
+                    await _userManager.UpdateAsync(currentUser);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid password.");
+                }
+            }
+            return View(model);
+        }
+
+        public ActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        //  Helpers
+        private Task<ApplicationUser> GetCurrentUserAsync()
+        {
+            return _userManager.GetUserAsync(User);
         }
     }
 }

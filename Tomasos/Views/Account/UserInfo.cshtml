@@ -1,0 +1,57 @@
+﻿@model Tomasos.ViewModels.UserInfoViewModel
+
+<form asp-controller="Account" asp-action="UserInfo" method="post">
+    <h2>Account information</h2>
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <h4>Location</h4>
+    <div class="form-group">
+        <label asp-for="Street"></label>
+        <input asp-for="Street" class="form-control" />
+        <span asp-validation-for="Street" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Postcode"></label>
+        <input asp-for="Postcode" class="form-control" />
+        <span asp-validation-for="Postcode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="City"></label>
+        <input asp-for="City" class="form-control" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+    <hr />
+
+    <h4>Contact</h4>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    <hr />
+    <h4>Password</h4>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ConfirmPassword"></label>
+        <input asp-for="ConfirmPassword" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+    <hr />
+    <h4>Confirmation</h4>
+    <div class="form-group">
+        <label asp-for="CurrentPassword"></label>
+        <input asp-for="CurrentPassword" class="form-control" />
+        <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+    </div>
+    <hr />
+    <button class="btn btn-primary searchHeight">Save</button>
+</form>
