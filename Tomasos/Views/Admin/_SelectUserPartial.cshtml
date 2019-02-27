@@ -1,0 +1,18 @@
+﻿@model Tomasos.ViewModels.Admin.SelectUserViewModel
+
+<h4>Selected user</h4>
+
+<form asp-controller="Admin" asp-action="ShowUserInfo"
+    data-ajax="true"
+    data-ajax-method="POST"
+    data-ajax-mode="replace"
+    data-ajax-update="#userInfo">
+
+    <select name="id">
+    @foreach(var user in Model.Users)
+    {
+        <option value="@user.Id">@user.UserName</option>
+    }
+    </select>
+    <input type="submit" value="Show" />
+</form>

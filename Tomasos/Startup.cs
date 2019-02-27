@@ -43,7 +43,7 @@ namespace Tomasos
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
 
                 options.LoginPath = "/Account/Login";
                 options.AccessDeniedPath = "/Account/AccessDenied";

@@ -24,5 +24,11 @@ namespace Tomasos.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Menu()
+        {
+            return View();
+        }
     }
 }

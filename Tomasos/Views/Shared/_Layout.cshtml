@@ -1,12 +1,11 @@
 ﻿<head>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
+    <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <!-- AJAX -->
+    <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
 
     <link rel="stylesheet" href="~/CSS/StyleSheet.css" />
     <title>Tomasos Pizzeria</title>
@@ -28,9 +27,12 @@
                 @if (User.IsInRole("Admin"))
                 {
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Admin" asp-action="Admin">Admin pages</a>
+                        <a class="nav-link" asp-controller="Admin" asp-action="Admin">Admin</a>
                     </li>
                 }
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Menu">Menu</a>
+                </li>
             </ul>
             @await Html.PartialAsync("_LoginPartial")
         </div>

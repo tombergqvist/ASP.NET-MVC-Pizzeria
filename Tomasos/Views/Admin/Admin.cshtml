@@ -1,1 +1,14 @@
-﻿ADMIN PAGES
+﻿<h2>Admin page</h2>
+
+<form asp-action="SearchUser" asp-controller="Admin"
+      data-ajax="true"
+      data-ajax-method="POST"
+      data-ajax-mode="replace"
+      data-ajax-update="#searchResult">
+
+    <input type="text" name="searchValue" />
+    <input type="submit" value="Search" />
+</form>
+
+<div id="searchResult"></div>
+<div id="userInfo"></div>
