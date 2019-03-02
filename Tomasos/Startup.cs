@@ -27,6 +27,9 @@ namespace Tomasos
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
             services.AddMvc();
 
             services.AddDbContext <TomasosContext>(options => options.UseSqlServer
@@ -58,6 +61,7 @@ namespace Tomasos
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseSession();
             app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();

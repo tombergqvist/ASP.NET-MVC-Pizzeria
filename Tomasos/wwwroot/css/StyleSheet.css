@@ -1,2 +1,7 @@
 ﻿body {
 }
+
+div.jumbotron {
+    background-color: darkslategray;
+    margin-bottom: 0px;
+}

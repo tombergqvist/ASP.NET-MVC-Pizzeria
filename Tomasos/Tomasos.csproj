@@ -10,17 +10,21 @@
     <Compile Remove="Migrations\20190225181835_TomasosForeignKeyFix.Designer.cs" />
     <Compile Remove="Migrations\20190225184315_TomasosForeignKey.cs" />
     <Compile Remove="Migrations\20190225184315_TomasosForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20190301211323_TomasosAddedPoints.cs" />
+    <Compile Remove="Migrations\20190301211323_TomasosAddedPoints.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.2" />
   </ItemGroup>
 

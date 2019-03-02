@@ -1,0 +1,11 @@
+﻿@model Tomasos.ViewModels.CartViewModel
+
+<h2>Your order</h2>
+@foreach (var dish in Model.Dishes)
+{
+    <p>@{<span>@dish.Value</span>}x @dish.Key.MatrattNamn @dish.Key.Pris</p>
+}
+<p>Total price: @Model.TotalPrice</p>
+<form asp-controller="Home" asp-action="PlaceOrder">
+    <button>Place order</button>
+</form>

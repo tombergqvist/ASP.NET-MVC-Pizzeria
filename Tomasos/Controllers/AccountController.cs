@@ -47,7 +47,7 @@ namespace Tomasos.Controllers
                     if (result.Succeeded)
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return RedirectToAction("Registered");
+                        return View("Registered");
                     }
                 }
                 foreach (var error in result.Errors)
@@ -57,13 +57,6 @@ namespace Tomasos.Controllers
             }
             return View(model);
         }
-
-        [HttpGet]
-        public ActionResult Registered()
-        {
-            return View();
-        }
-
 
         [HttpGet]
         public ActionResult Login()

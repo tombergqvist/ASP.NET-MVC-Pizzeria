@@ -12,6 +12,7 @@ namespace Tomasos.IdentityModels
         public string Street { get; set; }
         public string Postcode { get; set; }
         public string City { get; set; }
+        public int? Points { get; set; }
 
         public virtual ICollection<Bestallning> Bestallning { get; set; }
     }

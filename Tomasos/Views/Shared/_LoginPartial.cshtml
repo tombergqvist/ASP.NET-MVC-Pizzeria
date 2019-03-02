@@ -5,24 +5,20 @@
 @if (signInManager.IsSignedIn(User))
 {
     <form asp-controller="Account" asp-action="Logout" method="post">
-        <ul class="navbar-nav">
-            <li>
-                <a class="nav-link" asp-controller="Account" asp-action="UserInfo">@userManager.GetUserName(User)</a>
-            </li>
-            <li>
-                <button type="submit">Logout</button>
-            </li>
-        </ul>
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Account" asp-action="UserInfo">@userManager.GetUserName(User)</a>
+        </li>
+        <li class="nav-item">
+            <button type="submit">Logout</button>
+        </li class="nav-item">
     </form>
 }
 else
 {
-    <ul class="navbar-nav">
-        <li>
-            <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
-        </li>
-        <li>
-            <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
-        </li>
-    </ul>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
+    </li>
 }

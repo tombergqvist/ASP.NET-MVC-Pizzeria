@@ -1,1 +1,30 @@
-﻿This is the Menu.
+﻿@model Tomasos.ViewModels.MenuViewModel
+
+<h2>Menu</h2>
+<hr />
+@foreach (var type in Model.DishByType)
+{
+    <h4>@type.Key</h4>
+    foreach (var dish in type.Value)
+    {
+        <h5>@dish.MatrattNamn</h5>
+        <p>@dish.Beskrivning</p>
+        <h6>Ingredients</h6>
+        @foreach (var product in dish.MatrattProdukt)
+        {
+            <span>@product.Produkt.ProduktNamn </span>
+        }
+        <p>
+            Price: @dish.Pris
+            @if (User.Identity.IsAuthenticated)
+            {
+                <form asp-controller="Home" asp-action="AddToCart" asp-route-id="@dish.MatrattId"
+                      data-ajax="true"
+                      data-ajax-method="POST">
+                    <button>Add to cart.</button>
+                </form>
+            }
+        </p>
+    }
+    <hr />
+}
