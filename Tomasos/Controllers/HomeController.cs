@@ -51,11 +51,15 @@ namespace Tomasos.Controllers
         }
 
         [HttpGet]
-        public ActionResult Cart()
+        [Authorize(Roles = "Regular, Premium, Admin")]
+        public async Task<ActionResult> Cart()
         {
             CartViewModel cart = new CartViewModel();
             string order = HttpContext.Session.GetString("Order");
-            if(order != null)
+
+            var user = await GetCurrentUserAsync();
+            cart.Points = user.Points ?? 0;
+            if (order != null)
             {
                 foreach(var dish in JsonConvert.DeserializeObject<List<Matratt>>(order))
                 {
@@ -69,14 +73,25 @@ namespace Tomasos.Controllers
                         var value = cart.Dishes[key.First()];
                         cart.Dishes[key.First()] = ++value;
                     }
+                    
                 }
                 cart.TotalPrice = cart.Dishes.Sum(d => d.Value * d.Key.Pris);
+                cart.Points += cart.Dishes.Sum(d => d.Value) * 10;
+                // Display altered prices 
+                // Free pizza at 100 points (the most expensive)
+                if (User.IsInRole("Premium") && cart.Points >= 100)
+                    cart.TotalPrice -= cart.Dishes.Max(d => d.Key.Pris);
+                // 20% of order when dishes >= 3
+                if (User.IsInRole("Premium") && cart.Dishes.Sum(d => d.Value) >= 3)
+                    cart.TotalPrice = (int)(cart.TotalPrice * 0.8);
+                
             }
             return View(cart);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Regular, Premium, Admin")]
         public ActionResult AddToCart(int id)
         {
             var dish = _context.Matratt.First(m => m.MatrattId == id);
@@ -94,6 +109,7 @@ namespace Tomasos.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Regular, Premium, Admin")]
         public async Task<ActionResult> PlaceOrder()
         {
             string sessionString = HttpContext.Session.GetString("Order");
@@ -115,8 +131,25 @@ namespace Tomasos.Controllers
                         order.BestallningMatratt.Single(o => o.MatrattId == dish.MatrattId).Antal++;
                     }
                 }
+                // Change to altered prices, depending on bonus points and how many dishes
+                var user = await GetCurrentUserAsync();
+                if (User.IsInRole("Premium"))
+                {
+                    if(user.Points == null)
+                        user.Points = 0;
+                    user.Points += 10 * dishes.Count;
+                    if (user.Points >= 100)
+                    {
+                        order.Totalbelopp -= dishes.Max(d => d.Pris);
+                        user.Points -= 100;
+                    }
+                    if (dishes.Count >= 3)
+                        order.Totalbelopp = (int)(order.Totalbelopp * 0.8);
+                }
+
                 _context.Add(order);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
+                HttpContext.Session.Remove("Order");
                 return View("ThankYou");
             }
             else

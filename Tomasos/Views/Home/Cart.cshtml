@@ -1,6 +1,11 @@
 ﻿@model Tomasos.ViewModels.CartViewModel
 
 <h2>Your order</h2>
+@if(User.IsInRole("Premium"))
+{
+    <p>You have: <b>@Model.Points</b> premium points collected including this order. (collect 100 to get the most expensive dish for free!)</p>
+    <p>If you order 3 or more dishes, you get 20% off on your full order!</p>
+}
 @foreach (var dish in Model.Dishes)
 {
     <p>@{<span>@dish.Value</span>}x @dish.Key.MatrattNamn @dish.Key.Pris</p>

@@ -10,6 +10,7 @@ namespace Tomasos.ViewModels
     {
         public Dictionary<Matratt, int> Dishes { get; set; }
         public int TotalPrice { get; set; }
+        public int Points { get; set; }
 
         public CartViewModel()
         {
