@@ -1,6 +1,6 @@
 ﻿@model Tomasos.ViewModels.Admin.DishViewModel
 
-<form asp-controller="Admin" asp-action="SaveDish"
+<form asp-controller="Recipe" asp-action="SaveDish"
       data-ajax="true"
       data-ajax-method="POST"
       data-ajax-mode="replace"
@@ -54,7 +54,7 @@
 </form>
 @if (Model.Id != null)
 {
-    <form asp-controller="Admin" asp-action="DeleteDish"
+    <form asp-controller="Recipe" asp-action="DeleteDish"
           data-ajax="true"
           data-ajax-method="POST"
           data-ajax-mode="replace"
@@ -63,7 +63,7 @@
 
         <button class="btn btn-primary floatLeft">Delete</button>
     </form>
-    <form asp-controller="Admin" asp-action="AddOrRemoveIngredient"
+    <form asp-controller="Recipe" asp-action="AddOrRemoveIngredient"
           data-ajax="true"
           data-ajax-method="POST"
           data-ajax-mode="replace"

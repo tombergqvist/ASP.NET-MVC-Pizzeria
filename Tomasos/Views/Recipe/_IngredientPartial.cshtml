@@ -1,6 +1,6 @@
 ﻿@model Tomasos.ViewModels.Admin.IngredientViewModel
 
-<form asp-controller="Admin" asp-action="SaveIngredient"
+<form asp-controller="Recipe" asp-action="SaveIngredient"
       data-ajax="true"
       data-ajax-method="POST"
       data-ajax-mode="replace"
@@ -18,7 +18,7 @@
 </form>
 @if (Model.Id != null)
 {
-    <form asp-controller="Admin" asp-action="DeleteIngredient"
+    <form asp-controller="Recipe" asp-action="DeleteIngredient"
           data-ajax="true"
           data-ajax-method="POST"
           data-ajax-mode="replace"

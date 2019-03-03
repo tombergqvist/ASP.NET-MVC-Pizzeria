@@ -14,7 +14,7 @@
         {
             <span>| @product.Produkt.ProduktNamn </span>
         }
-        <p>
+        <div>
             Price: @dish.Pris
             @if (User.Identity.IsAuthenticated)
             {
@@ -24,7 +24,7 @@
                     <button>Add to cart.</button>
                 </form>
             }
-        </p>
+        </div>
+        <hr />
     }
-    <hr />
 }
