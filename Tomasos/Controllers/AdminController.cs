@@ -298,7 +298,47 @@ namespace Tomasos.Controllers
             return RedirectToAction("Dish");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public ActionResult AddOrRemoveIngredient(int ingredientId, int dishId, string buttonType)
+        {
+            switch (buttonType)
+            {
+                case "Add":
+                    AddIngredient(ingredientId, dishId);
+                    break;
+                case "Remove":
+                    RemoveIngredient(ingredientId, dishId);
+                    break;
+            }
+            return LoadDish(dishId);
+        }
+
         // Helpers
+        private void AddIngredient(int ingredientId, int dishId)
+        {
+            var dish = _context.MatrattProdukt.SingleOrDefault(m => m.MatrattId == dishId && m.ProduktId == ingredientId);
+            if (dish == null)
+            {
+                _context.Add(new MatrattProdukt { ProduktId = ingredientId, MatrattId = dishId });
+                _context.SaveChanges();
+            }
+        }
+
+        private void RemoveIngredient(int? ingredientId, int? dishId)
+        {
+            if (dishId != null)
+            {
+                foreach (var dishIngredient in _context.MatrattProdukt
+                    .Where(m => m.MatrattId == dishId && m.ProduktId == ingredientId))
+                {
+                    _context.Remove(dishIngredient);
+                }
+                _context.SaveChanges();
+            }
+        }
+
         private void AddAttributesToDish(DishViewModel model, Matratt dish)
         {
             dish.MatrattNamn = model.Name;

@@ -39,12 +39,12 @@
         </select>
     </div>
     <label>Ingredients</label>
-    <p>|
+    <p>
         @if (Model.Ingredients.Count > 0)
         {
             @foreach (var ingredient in Model.Ingredients)
             {
-                <span>@ingredient.ProduktNamn | </span>
+                <span>| @ingredient.ProduktNamn </span>
             }
         }
     </p>
@@ -63,15 +63,22 @@
 
         <button class="btn btn-primary floatLeft">Delete</button>
     </form>
-    <form asp-controller="Admin" asp-action="AddIngredient">
+    <form asp-controller="Admin" asp-action="AddOrRemoveIngredient"
+          data-ajax="true"
+          data-ajax-method="POST"
+          data-ajax-mode="replace"
+          data-ajax-update="#dish"
+          asp-route-dishId="@Model.Id">
+
         <label asp-for="Ingredients"></label>
-        <select name="id">
+        <select name="ingredientId">
             @foreach (var ingredient in Model.AllIngredients)
             {
                 <option value="@ingredient.ProduktId">@ingredient.ProduktNamn</option>
             }
         </select>
-        <button class="btn btn-primary">Add</button>
+        <button class="btn btn-primary" value="Add" name="buttonType">Add</button>
+        <button class="btn btn-primary" value="Remove" name="buttonType">Remove</button>
     </form>
 }
 <div>@Model.Message</div>
