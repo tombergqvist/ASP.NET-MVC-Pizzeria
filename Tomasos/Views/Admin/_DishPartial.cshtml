@@ -1,0 +1,77 @@
+﻿@model Tomasos.ViewModels.Admin.DishViewModel
+
+<form asp-controller="Admin" asp-action="SaveDish"
+      data-ajax="true"
+      data-ajax-method="POST"
+      data-ajax-mode="replace"
+      data-ajax-update="#dish"
+      asp-route-id="@Model.Id">
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" placeholder="@Model.Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" placeholder="@Model.Description" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" placeholder="@Model.Price" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Type"></label>
+        <select asp-for="Type">
+            @foreach (var type in Model.AllTypes)
+            {
+                if (type.MatrattTyp1 == Model.Type)
+                {
+                    <option selected="selected" value="@type.MatrattTyp1">@type.Beskrivning</option>
+                }
+                else
+                {
+                    <option value="@type.MatrattTyp1">@type.Beskrivning</option>
+                }
+            }
+        </select>
+    </div>
+    <label>Ingredients</label>
+    <p>|
+        @if (Model.Ingredients.Count > 0)
+        {
+            @foreach (var ingredient in Model.Ingredients)
+            {
+                <span>@ingredient.ProduktNamn | </span>
+            }
+        }
+    </p>
+    <hr />
+    <button class="btn btn-primary floatLeft">Save</button>
+
+</form>
+@if (Model.Id != null)
+{
+    <form asp-controller="Admin" asp-action="DeleteDish"
+          data-ajax="true"
+          data-ajax-method="POST"
+          data-ajax-mode="replace"
+          data-ajax-update="#recipeChoice"
+          asp-route-id="@Model.Id" class="floatLeft">
+
+        <button class="btn btn-primary floatLeft">Delete</button>
+    </form>
+    <form asp-controller="Admin" asp-action="AddIngredient">
+        <label asp-for="Ingredients"></label>
+        <select name="id">
+            @foreach (var ingredient in Model.AllIngredients)
+            {
+                <option value="@ingredient.ProduktId">@ingredient.ProduktNamn</option>
+            }
+        </select>
+        <button class="btn btn-primary">Add</button>
+    </form>
+}
+<div>@Model.Message</div>

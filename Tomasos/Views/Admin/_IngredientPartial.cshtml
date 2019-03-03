@@ -1,0 +1,31 @@
+﻿@model Tomasos.ViewModels.Admin.IngredientViewModel
+
+<form asp-controller="Admin" asp-action="SaveIngredient"
+      data-ajax="true"
+      data-ajax-method="POST"
+      data-ajax-mode="replace"
+      data-ajax-update="#ingredient"
+      asp-route-id="@Model.Id">
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" placeholder="@Model.Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <hr />
+    <button class="btn btn-primary floatLeft">Save</button>
+
+</form>
+@if (Model.Id != null)
+{
+    <form asp-controller="Admin" asp-action="DeleteIngredient"
+          data-ajax="true"
+          data-ajax-method="POST"
+          data-ajax-mode="replace"
+          data-ajax-update="#recipeChoice"
+          asp-route-id="@Model.Id" class="floatLeft">
+
+        <button class="btn btn-primary floatLeft">Delete</button>
+    </form>
+}
+<div>@Model.Message</div>

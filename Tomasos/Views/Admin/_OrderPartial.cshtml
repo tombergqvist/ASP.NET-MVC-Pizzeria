@@ -1,0 +1,27 @@
+﻿@model Tomasos.ViewModels.Admin.OrderViewModel
+
+<form asp-controller="Admin" asp-action="SaveOrder"
+      data-ajax="true"
+      data-ajax-method="POST"
+      data-ajax-update="#order"
+      data-ajax-mode="replace"
+      asp-route-id="@Model.Id">
+
+    <h4>Selected order</h4>
+    <div class="form-group">
+        <label asp-for="Id"></label>
+        <span>@Model.Id</span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TotalPrice"></label>
+        <input asp-for="TotalPrice" class="form-control" />
+        <span asp-validation-for="TotalPrice" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Delivered"></label>
+        <input asp-for="Delivered" type="checkbox" />
+    </div>
+    <hr />
+    <button class="btn btn-primary searchHeight">Save</button>
+</form>
+<div>@Model.Message</div>

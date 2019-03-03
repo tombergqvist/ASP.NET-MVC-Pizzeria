@@ -12,5 +12,6 @@ namespace Tomasos.ViewModels.Admin
         public ApplicationUser User { get; set; }
         public List<string> AvailableRoles { get; set; }
         public bool IsAdmin { get; set; }
+        public List<Bestallning> Orders { get; set; }
     }
 }

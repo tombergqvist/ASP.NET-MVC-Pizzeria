@@ -1,0 +1,24 @@
+﻿@model List<Tomasos.Models.Matratt>
+
+<form asp-action="LoadDish" asp-controller="Admin"
+      data-ajax="true"
+      data-ajax-method="POST"
+      data-ajax-mode="replace"
+      data-ajax-update="#dish">
+    <select name="id">
+        @foreach (var dish in Model)
+        {
+            <option value="@dish.MatrattId">@dish.MatrattNamn</option>
+        }
+    </select>
+
+    <button>Load</button>
+</form>
+<form asp-action="NewDish" asp-controller="Admin"
+      data-ajax="true"
+      data-ajax-method="GET"
+      data-ajax-mode="replace"
+      data-ajax-update="#dish">
+    <button>New Dish</button>
+</form>
+<div id="dish"></div>

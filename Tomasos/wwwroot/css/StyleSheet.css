@@ -1,7 +1,15 @@
 ﻿body {
+    
 }
 
 div.jumbotron {
-    background-color: darkslategray;
+    background-color: black;
+    color: lightgray;
+    padding: 20px;
     margin-bottom: 0px;
+}
+
+.floatLeft{
+    float: left;
+    margin-right: 10px;
 }

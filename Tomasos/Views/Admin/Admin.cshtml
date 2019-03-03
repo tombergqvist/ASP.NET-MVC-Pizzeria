@@ -1,14 +1,33 @@
 ﻿<h2>Admin page</h2>
+<hr />
+<div class="row">
+    <div class="col">
+        <h5>Recipes</h5>
+        <form asp-action="Recipe" asp-controller="Admin"
+              data-ajax="true"
+              data-ajax-method="POST"
+              data-ajax-mode="replace"
+              data-ajax-update="#recipeChoice">
 
-<form asp-action="SearchUser" asp-controller="Admin"
-      data-ajax="true"
-      data-ajax-method="POST"
-      data-ajax-mode="replace"
-      data-ajax-update="#searchResult">
+            <button value="Dish" name="buttonType">Dish</button>
+            <button value="Ingredient" name="buttonType">Ingredient</button>
+        </form>
 
-    <input type="text" name="searchValue" />
-    <input type="submit" value="Search" />
-</form>
+        <div id="recipeChoice"></div>
+    </div>
+    <div class="col">
+        <h5>Users</h5>
+        <form asp-action="SearchUser" asp-controller="Admin"
+              data-ajax="true"
+              data-ajax-method="POST"
+              data-ajax-mode="replace"
+              data-ajax-update="#searchResult">
 
-<div id="searchResult"></div>
-<div id="userInfo"></div>
+            <input type="text" name="searchValue" />
+            <input type="submit" value="Search" />
+        </form>
+
+        <div id="searchResult"></div>
+    </div>
+    <div class="col" id="order"></div>
+</div>
