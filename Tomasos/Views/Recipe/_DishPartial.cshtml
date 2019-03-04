@@ -49,7 +49,7 @@
         }
     </p>
     <hr />
-    <button class="btn btn-primary floatLeft">Save</button>
+    <button class="btn btn-success floatLeft">Save</button>
 
 </form>
 @if (Model.Id != null)
@@ -61,7 +61,7 @@
           data-ajax-update="#recipeChoice"
           asp-route-id="@Model.Id" class="floatLeft">
 
-        <button class="btn btn-primary floatLeft">Delete</button>
+        <button class="btn btn-danger floatLeft">Delete</button>
     </form>
     <form asp-controller="Recipe" asp-action="AddOrRemoveIngredient"
           data-ajax="true"
@@ -77,8 +77,8 @@
                 <option value="@ingredient.ProduktId">@ingredient.ProduktNamn</option>
             }
         </select>
-        <button class="btn btn-primary" value="Add" name="buttonType">Add</button>
-        <button class="btn btn-primary" value="Remove" name="buttonType">Remove</button>
+        <button class="btn btn-success" value="Add" name="buttonType">Add</button>
+        <button class="btn btn-danger" value="Remove" name="buttonType">Remove</button>
     </form>
 }
 <div>@Model.Message</div>

@@ -13,7 +13,7 @@
 
 <body>
     <div class="jumbotron text-center">
-        <h1>Tomasos Pizza</h1>
+        <h1>Tomaso's Pizzeria</h1>
         <p>Do you want food? We have food.</p>
     </div>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
@@ -26,27 +26,22 @@
         </button>
 
         <!-- Navbar links -->
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
+        <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
+            <div class="navbar-nav">
                 @if (User.IsInRole("Admin"))
                 {
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Admin" asp-action="Admin">Admin</a>
-                    </li>
+                    <a class="nav-item nav-link" asp-controller="Admin" asp-action="Admin">Admin</a>
                 }
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Home" asp-action="Menu">Menu</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
+                <a class="nav-item nav-link" asp-controller="Home" asp-action="Menu">Menu</a>
+                
+            </div>
+            <div class="navbar-nav">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="Cart">Cart</a>
-                    </li>
+                    <a class="nav-item nav-link" asp-controller="Home" asp-action="Cart">Cart</a>
                 }
                 @await Html.PartialAsync("_LoginPartial")
-            </ul>
+            </div>
         </div>
     </nav>
     <div id="main">

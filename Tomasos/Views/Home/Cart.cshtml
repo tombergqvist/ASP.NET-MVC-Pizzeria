@@ -1,5 +1,5 @@
 ﻿@model Tomasos.ViewModels.CartViewModel
-
+<div class="text-center">
 <h2>Your order</h2>
 @if(User.IsInRole("Premium"))
 {
@@ -10,7 +10,9 @@
 {
     <p>@{<span>@dish.Value</span>}x @dish.Key.MatrattNamn @dish.Key.Pris</p>
 }
+    <hr />
 <p>Total price: @Model.TotalPrice</p>
 <form asp-controller="Home" asp-action="PlaceOrder">
-    <button>Place order</button>
+    <button class="btn btn-success">Place order</button>
 </form>
+</div>

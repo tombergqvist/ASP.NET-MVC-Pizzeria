@@ -1,47 +1,50 @@
 ﻿@model Tomasos.ViewModels.RegisterViewModel
 
+<div class="col">
 <form asp-controller="Account" asp-action="Register" method="post">
-    <h2>Create a new account</h2>
+
+    <h2 class="text-center">Create a new account</h2>
     <hr />
     <div class="form-group">
         <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
+        <input asp-for="Email" class="form-control" placeholder="Email"/>
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Username"></label>
-        <input asp-for="Username" class="form-control" />
+        <input asp-for="Username" class="form-control" placeholder="Username"/>
         <span asp-validation-for="Username" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Password"></label>
-        <input asp-for="Password" class="form-control" />
+        <input asp-for="Password" class="form-control" placeholder="Password"/>
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="ConfirmPassword"></label>
-        <input asp-for="ConfirmPassword" class="form-control" />
+        <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm password"/>
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Street"></label>
-        <input asp-for="Street" class="form-control" />
+        <input asp-for="Street" class="form-control" placeholder="Street"/>
         <span asp-validation-for="Street" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Postcode"></label>
-        <input asp-for="Postcode" class="form-control" />
+        <input asp-for="Postcode" class="form-control" placeholder="Postcode"/>
         <span asp-validation-for="Postcode" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="City"></label>
-        <input asp-for="City" class="form-control" />
+        <input asp-for="City" class="form-control" placeholder="City"/>
         <span asp-validation-for="City" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Phone"></label>
-        <input asp-for="Phone" class="form-control" />
+        <input asp-for="Phone" class="form-control" placeholder="Phone"/>
         <span asp-validation-for="Phone" class="text-danger"></span>
     </div>
-    <button class="btn btn-primary searchHeight">Register</button>
+    <div class="text-center"><button class="btn btn-primary searchHeight">Register</button></div>
 </form>
+</div>

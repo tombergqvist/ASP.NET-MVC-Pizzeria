@@ -1,30 +1,36 @@
 ﻿@model Tomasos.ViewModels.MenuViewModel
 
-<h2>Menu</h2>
-<hr />
-@foreach (var type in Model.DishByType)
-{
-    <h4>@type.Key</h4>
-    foreach (var dish in type.Value)
-    {
-        <h5>@dish.MatrattNamn</h5>
-        <p>@dish.Beskrivning</p>
-        <h6>Ingredients</h6>
-        @foreach (var product in dish.MatrattProdukt)
-        {
-            <span>| @product.Produkt.ProduktNamn </span>
-        }
-        <div>
-            Price: @dish.Pris
-            @if (User.Identity.IsAuthenticated)
+<div class="row">
+    <div class="col">
+        <div class="text-center">
+            <h2>Menu</h2>
+            <hr />
+            @foreach (var type in Model.DishByType)
             {
-                <form asp-controller="Home" asp-action="AddToCart" asp-route-id="@dish.MatrattId"
-                      data-ajax="true"
-                      data-ajax-method="POST">
-                    <button>Add to cart.</button>
-                </form>
+                <h4 class="addColorBlock">@type.Key</h4>
+                foreach (var dish in type.Value)
+                {
+                    <h5>@dish.MatrattNamn</h5>
+                    <p>@dish.Beskrivning</p>
+                    <h6>Ingredients</h6>
+                    @foreach (var product in dish.MatrattProdukt)
+                    {
+                        <span>| @product.Produkt.ProduktNamn </span>
+                    }
+                    <div>
+                        Price: @dish.Pris
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form asp-controller="Home" asp-action="AddToCart" asp-route-id="@dish.MatrattId"
+                                  data-ajax="true"
+                                  data-ajax-method="POST">
+                                <button class="btn btn-success">Add to cart</button>
+                            </form>
+                        }
+                    </div>
+                    <hr />
+                }
             }
+            </div>
         </div>
-        <hr />
-    }
-}
+</div>

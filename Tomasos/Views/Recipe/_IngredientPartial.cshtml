@@ -13,7 +13,7 @@
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <hr />
-    <button class="btn btn-primary floatLeft">Save</button>
+    <button class="btn btn-success floatLeft">Save</button>
 
 </form>
 @if (Model.Id != null)
@@ -25,7 +25,7 @@
           data-ajax-update="#recipeChoice"
           asp-route-id="@Model.Id" class="floatLeft">
 
-        <button class="btn btn-primary floatLeft">Delete</button>
+        <button class="btn btn-danger floatLeft">Delete</button>
     </form>
 }
 <div>@Model.Message</div>
